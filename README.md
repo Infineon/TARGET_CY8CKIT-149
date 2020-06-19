@@ -1,0 +1,2 @@
+# TARGET_CY8CKIT-149
+BSP for PSoC 4100S Plus Prototyping board (CY8CKIT-149)
