@@ -57,14 +57,12 @@ __FLASH_SIZE =  0x00020000;
 __RAM_START = 0x20000000;
 __RAM_SIZE =  0x00004000;
 
-/*--------------------- Stack / Heap Configuration ---------------------------
-; <h> Stack / Heap Configuration
+/*--------------------- Stack Configuration ----------------------------------
+; <h> Stack Configuration
 ;   <o0> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
-;   <o1> Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
  -----------------------------------------------------------------------------*/
 __STACK_SIZE = 0x00000400;
-__HEAP_SIZE  = 0x00000080;
 
 /* The MEMORY section below describes the location and size of blocks of memory in the target.
  * Use this section to specify the memory regions available for allocation.
@@ -107,8 +105,6 @@ MEMORY
  *   __StackLimit
  *   __StackTop
  *   __stack
- *   __Vectors_End
- *   __Vectors_Size
  */
 ENTRY(Reset_Handler)
 
@@ -122,10 +118,8 @@ SECTIONS
     .text :
     {
         . = ALIGN(4);
-        __Vectors = . ;
         KEEP(*(.vectors))
         . = ALIGN(4);
-        __Vectors_End = .;
         __end__ = .;
 
         . = ALIGN(4);
@@ -283,7 +277,7 @@ SECTIONS
     {
         . = ALIGN(4);
         __bss_start__ = .;
-    *(.bss)
+        *(.bss)
         *(.bss.*)
         *(COMMON)
         . = ALIGN(4);
@@ -302,7 +296,7 @@ SECTIONS
     {
         . = ALIGN(4);
         __bss2_start__ = .;
-    *(.bss2)
+        *(.bss2)
         *(.bss2.*)
         . = ALIGN(4);
         __bss2_end__ = .;
@@ -311,13 +305,14 @@ SECTIONS
 
     .heap :
     {
-    . = ALIGN(4);
+        . = ALIGN(4);
+        __HeapBase = .;
         __end__ = .;
         PROVIDE(end = .);
-        . = . + __HEAP_SIZE;
-    . = ALIGN(4);
+        . = ORIGIN(RAM) + LENGTH(RAM) - __STACK_SIZE;
         __HeapLimit = .;
     } > RAM
+
    /* .stack section doesn't contains any symbols. It is only used
     * for linker to calculate size of stack sections, and assign
     * values to stack symbols later.
@@ -352,6 +347,6 @@ SECTIONS
 /* Flash */
 __cy_memory_0_start    = 0x00000000;
 __cy_memory_0_length   = 0x00020000;
-__cy_memory_0_row_size = 0x200;
+__cy_memory_0_row_size = 0x100;
 
 /* EOF */

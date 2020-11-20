@@ -1,12 +1,13 @@
 ################################################################################
-# \file CY8CKIT-149.mk
+# \file locate_recipe.mk
 #
 # \brief
-# Define the CY8CKIT-149 target.
+# Helper file for the BSP to specify the path to the core & recipe makefiles
+# that is includes as dependent libraries.
 #
 ################################################################################
 # \copyright
-# Copyright 2019-2020 Cypress Semiconductor Corporation
+# Copyright 2020 Cypress Semiconductor Corporation
 # SPDX-License-Identifier: Apache-2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,12 +28,18 @@ $(info Processing $(lastword $(MAKEFILE_LIST)))
 endif
 
 # Set the default build recipe for this board if not set by the user
-include $(dir $(lastword $(MAKEFILE_LIST)))/locate_recipe.mk
+ifeq ($(CY_BASELIB_PATH),)
 
-# MCU device selection
-DEVICE:=CY8C4147AZI-S475
+ifneq ($(SEARCH_core-make),)
+CY_BASELIB_CORE_PATH=$(SEARCH_core-make)
+else
+CY_BASELIB_CORE_PATH=./libs/core-make
+endif
 
-# Additional components supported by the target
-COMPONENTS+=BSP_DESIGN_MODUS CAT2 PSOC4HAL
-# Use CyHAL
-DEFINES+=CY_USING_HAL
+ifneq ($(SEARCH_recipe-make-cat2),)
+CY_BASELIB_PATH=$(SEARCH_recipe-make-cat2)
+else
+CY_BASELIB_PATH=./libs/recipe-make-cat2
+endif
+
+endif #($(CY_BASELIB_PATH),)

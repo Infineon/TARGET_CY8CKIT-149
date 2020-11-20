@@ -1,6 +1,6 @@
 /******************************************************************************
  * @file     startup_Device.c
- * @brief    CMSIS-Core(M) Device Startup File for <Device>
+ * @brief    CMSIS-Core(M) Device Startup File for Category 2 device
  * @version  V2.0.0
  * @date     20. May 2019
  ******************************************************************************/
@@ -25,28 +25,23 @@
 #include <stdbool.h>
 #include <string.h>
 #include "cy_utils.h"
-#include "system_psoc4.h"
+#include "system_cat2.h"
 #include "cy_device.h"
 #include "cy_device_headers.h"
 #include "cy_syslib.h"
 
 #ifndef __RAM_VECTOR_TABLE_ATTRIBUTE
-  #if defined(__ARMCC_VERSION)
-    #define __RAM_VECTOR_TABLE_ATTRIBUTE __attribute((used, section(".bss.RESET_RAM")))
-  #elif defined(__GNUC__)
-    #define __RAM_VECTOR_TABLE_ATTRIBUTE CY_SECTION(".ram_vectors")
-  #elif defined(__ICCARM__)
-    #define __RAM_VECTOR_TABLE_ATTRIBUTE __attribute__ ((used, section(".intvec_ram")))
-  #else
+    #if defined(__ARMCC_VERSION)
+        #define __RAM_VECTOR_TABLE_ATTRIBUTE __attribute((used, section(".bss.RESET_RAM")))
+    #elif defined(__GNUC__)
+        #define __RAM_VECTOR_TABLE_ATTRIBUTE CY_SECTION(".ram_vectors")
+    #elif defined(__ICCARM__)
+        #define __RAM_VECTOR_TABLE_ATTRIBUTE __attribute__ ((used, section(".intvec_ram")))
+    #else
         #error "An unsupported toolchain"
     #endif  /* (__ARMCC_VERSION) */
-#endif
+#endif /* __RAM_VECTOR_TABLE_ATTRIBUTE */
 cy_israddress __RAM_VECTOR_TABLE[CY_VECTOR_TABLE_SIZE] __RAM_VECTOR_TABLE_ATTRIBUTE; /**< Relocated vector table in SRAM */
-
-/*----------------------------------------------------------------------------
-  Exception / Interrupt Handler Function Prototype
- *----------------------------------------------------------------------------*/
-typedef void( *pFunc )( void );
 
 /*----------------------------------------------------------------------------
   External References
@@ -66,13 +61,13 @@ void __NO_RETURN Reset_Handler  (void);
  *----------------------------------------------------------------------------*/
 /* Exceptions */
 
-#if defined ( __GNUC__ )
+#if defined(__GNUC__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wpedantic"
 #if (__GNUC__ >= 9)
 #pragma GCC diagnostic ignored "-Wmissing-attributes"
-#endif
-#endif
+#endif /* (__GNUC__ >= 9) */
+#endif /* defined(__GNUC__) */
 
 void NMI_Handler                        (void) __attribute__ ((weak, alias("Default_Handler")));
 void HardFault_Handler                  (void) __attribute__ ((weak));
@@ -92,7 +87,7 @@ void scb_1_interrupt_IRQHandler         (void) __attribute__ ((weak, alias("Defa
 void scb_2_interrupt_IRQHandler         (void) __attribute__ ((weak, alias("Default_Handler"))); /* SCB #2 */
 void scb_3_interrupt_IRQHandler         (void) __attribute__ ((weak, alias("Default_Handler"))); /* SCB #3 */
 void scb_4_interrupt_IRQHandler         (void) __attribute__ ((weak, alias("Default_Handler"))); /* SCB #4 */
-void pass_interrupt_ctbs_IRQHandler     (void) __attribute__ ((weak, alias("Default_Handler"))); /* CTBm Interrupt (all CTBms) */
+void pass_0_interrupt_ctbs_IRQHandler   (void) __attribute__ ((weak, alias("Default_Handler"))); /* CTBm Interrupt (all CTBms) */
 void wco_interrupt_IRQHandler           (void) __attribute__ ((weak, alias("Default_Handler"))); /* WCO WDT Interrupt */
 void cpuss_interrupt_dma_IRQHandler     (void) __attribute__ ((weak, alias("Default_Handler"))); /* DMA Interrupt */
 void cpuss_interrupt_spcif_IRQHandler   (void) __attribute__ ((weak, alias("Default_Handler"))); /* SPCIF interrupt */
@@ -105,7 +100,7 @@ void tcpwm_interrupts_4_IRQHandler      (void) __attribute__ ((weak, alias("Defa
 void tcpwm_interrupts_5_IRQHandler      (void) __attribute__ ((weak, alias("Default_Handler"))); /* TCPWM #0, Counter #5 */
 void tcpwm_interrupts_6_IRQHandler      (void) __attribute__ ((weak, alias("Default_Handler"))); /* TCPWM #0, Counter #6 */
 void tcpwm_interrupts_7_IRQHandler      (void) __attribute__ ((weak, alias("Default_Handler"))); /* TCPWM #0, Counter #7 */
-void pass_interrupt_sar_IRQHandler      (void) __attribute__ ((weak, alias("Default_Handler"))); /* SAR */
+void pass_0_interrupt_sar_IRQHandler    (void) __attribute__ ((weak, alias("Default_Handler"))); /* SAR */
 void can_interrupt_can_IRQHandler       (void) __attribute__ ((weak, alias("Default_Handler"))); /* CAN Interrupt */
 void crypto_interrupt_IRQHandler        (void) __attribute__ ((weak, alias("Default_Handler"))); /* Crypto Interrupt */
 
@@ -114,9 +109,9 @@ void crypto_interrupt_IRQHandler        (void) __attribute__ ((weak, alias("Defa
   Exception / Interrupt Vector table
  *----------------------------------------------------------------------------*/
 
-extern const pFunc __VECTOR_TABLE[CY_VECTOR_TABLE_SIZE];
-       const pFunc __VECTOR_TABLE[CY_VECTOR_TABLE_SIZE] __VECTOR_TABLE_ATTRIBUTE = {
-    (pFunc)(&__INITIAL_SP),                   /*     Initial Stack Pointer */
+extern const cy_israddress __VECTOR_TABLE[CY_VECTOR_TABLE_SIZE];
+       const cy_israddress __VECTOR_TABLE[CY_VECTOR_TABLE_SIZE] __VECTOR_TABLE_ATTRIBUTE = {
+    (cy_israddress)(&__INITIAL_SP),           /*     Initial Stack Pointer */
     Reset_Handler,                            /*     Reset Handler */
     NMI_Handler,                              /* -14 NMI Handler */
     HardFault_Handler,                        /* -13 Hard Fault Handler */
@@ -146,7 +141,7 @@ extern const pFunc __VECTOR_TABLE[CY_VECTOR_TABLE_SIZE];
     scb_2_interrupt_IRQHandler,               /*   9 SCB #2 */
     scb_3_interrupt_IRQHandler,               /*  10 SCB #3 */
     scb_4_interrupt_IRQHandler,               /*  11 SCB #4 */
-    pass_interrupt_ctbs_IRQHandler,           /*  12 CTBm Interrupt (all CTBms) */
+    pass_0_interrupt_ctbs_IRQHandler,         /*  12 CTBm Interrupt (all CTBms) */
     wco_interrupt_IRQHandler,                 /*  13 WCO WDT Interrupt */
     cpuss_interrupt_dma_IRQHandler,           /*  14 DMA Interrupt */
     cpuss_interrupt_spcif_IRQHandler,         /*  15 SPCIF interrupt */
@@ -159,14 +154,49 @@ extern const pFunc __VECTOR_TABLE[CY_VECTOR_TABLE_SIZE];
     tcpwm_interrupts_5_IRQHandler,            /*  22 TCPWM #0, Counter #5 */
     tcpwm_interrupts_6_IRQHandler,            /*  23 TCPWM #0, Counter #6 */
     tcpwm_interrupts_7_IRQHandler,            /*  24 TCPWM #0, Counter #7 */
-    pass_interrupt_sar_IRQHandler,            /*  25 SAR */
+    pass_0_interrupt_sar_IRQHandler,          /*  25 SAR */
     can_interrupt_can_IRQHandler,             /*  26 CAN Interrupt */
     crypto_interrupt_IRQHandler               /*  27 Crypto Interrupt */
 };
 
-#if defined ( __GNUC__ )
+#if defined (__GNUC__)
 #pragma GCC diagnostic pop
 #endif
+
+/* Provide empty __WEAK implementation for the low-level initialization
+   routine required by the RTOS-enabled applications.
+   clib-support library provides FreeRTOS-specific implementation:
+   https://github.com/cypresssemiconductorco/clib-support */
+void cy_toolchain_init(void);
+__WEAK void cy_toolchain_init(void)
+{
+}
+
+#if defined(__GNUC__) && !defined(__ARMCC_VERSION)
+/* GCC: newlib crt0 _start executes software_init_hook.
+   The cy_toolchain_init hook provided by clib-support library must execute
+   after static data initialization and before static constructors. */
+void software_init_hook();
+void software_init_hook()
+{
+    cy_toolchain_init();
+}
+#elif defined(__ICCARM__)
+/* Initialize data section */
+void __iar_data_init3(void);
+
+/* Call the constructors of all global objects */
+void __iar_dynamic_initialization(void);
+
+/* Define strong version to return zero for __iar_program_start
+   to skip data sections initialization (__iar_data_init3). */
+int __low_level_init(void);
+int __low_level_init(void)
+{
+    return 0;
+}
+#endif
+
 
 /*----------------------------------------------------------------------------
   Reset Handler called on controller reset
@@ -178,12 +208,27 @@ void Reset_Handler(void)
     /* CMSIS System Initialization */
     SystemInit();
 
-    /* Copy vector table from ROAM to RAM*/
+    /* Copy vector table from ROM to RAM*/
     memcpy(__RAM_VECTOR_TABLE, __VECTOR_TABLE, CY_VECTOR_TABLE_SIZE_BYTES);
 
     /* Set vector table offset */
+#if (__VTOR_PRESENT == 1u)
     SCB->VTOR = (uint32_t)&__RAM_VECTOR_TABLE;
+#else
+    CPUSS->CONFIG |= CPUSS_CONFIG_VECT_IN_RAM_Msk;
+#endif /* (__VTOR_PRESENT == 1u) */
     __DSB();
+
+#if defined(__ICCARM__)
+    /* Initialize data section */
+    __iar_data_init3();
+
+    /* Initialize mutex pools for multi-thread applications */
+    cy_toolchain_init();
+
+    /* Call the constructors of all global objects */
+    __iar_dynamic_initialization();
+#endif
 
     /* Enter PreMain (C library entry point) */
     __PROGRAM_START();
@@ -208,8 +253,11 @@ __WEAK void HardFault_Handler(void)
 
 __WEAK void Cy_OnResetUser(void)
 {
-    /* Empty weak function. The actual implementation to be in the provided by 
+    /* Empty weak function. The actual implementation to be in the provided by
     *  the application code strong function.
+    *
+    *  Call \ref SystemCoreClockUpdate() in this function to ensure global
+    * global variables with CPU frequency are initialized properly.
     */
 }
 

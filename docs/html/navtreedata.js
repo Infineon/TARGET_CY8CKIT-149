@@ -25,13 +25,13 @@ var NAVTREE =
 [
   [ "CY8CKIT-149 BSP", "index.html", [
     [ "BSP Overview", "md_bsp_boards_mt_bsp_user_guide.html", null ],
-    [ "BSP API Reference", "modules.html", "modules" ]
+    [ "BSP Settings", "md_bsp_settings.html", null ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"group__group__bsp__functions.html"
+"index.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

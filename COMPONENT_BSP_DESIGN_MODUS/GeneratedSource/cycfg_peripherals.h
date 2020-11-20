@@ -4,10 +4,10 @@
 * Description:
 * Peripheral Hardware Block configuration
 * This file was automatically generated and should not be modified.
-* Tools Package 2.1.0.1266
-* psoc4pdl 1.0.0.899
-* personalities_2.0 2.0.0.0
-* udd_2.0 2.0.0.299
+* Tools Package 2.2.0.2801
+* mtb-pdl-cat2 1.0.0.2377
+* personalities 3.0.0.0
+* udd 3.0.0.746
 *
 ********************************************************************************
 * Copyright 2020 Cypress Semiconductor Corporation
@@ -39,8 +39,8 @@ extern "C" {
 
 #define CYBSP_CSD_ENABLED 1U
 #define CY_CAPSENSE_CORE 0u
-#define CY_CAPSENSE_CPU_CLK 24000000u
-#define CY_CAPSENSE_PERI_CLK 24000000u
+#define CY_CAPSENSE_CPU_CLK 48000000u
+#define CY_CAPSENSE_PERI_CLK 48000000u
 #define CY_CAPSENSE_VDDA_MV 3300u
 #define CY_CAPSENSE_PERI_DIV_TYPE CY_SYSCLK_DIV_16_BIT
 #define CY_CAPSENSE_PERI_DIV_INDEX 0u

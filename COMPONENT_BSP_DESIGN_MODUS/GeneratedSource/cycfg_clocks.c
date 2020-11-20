@@ -4,10 +4,10 @@
 * Description:
 * Clock configuration
 * This file was automatically generated and should not be modified.
-* Tools Package 2.1.0.1266
-* psoc4pdl 1.0.0.899
-* personalities_2.0 2.0.0.0
-* udd_2.0 2.0.0.299
+* Tools Package 2.2.0.2801
+* mtb-pdl-cat2 1.0.0.2377
+* personalities 3.0.0.0
+* udd 3.0.0.746
 *
 ********************************************************************************
 * Copyright 2020 Cypress Semiconductor Corporation
@@ -28,10 +28,22 @@
 
 #include "cycfg_clocks.h"
 
+#if defined (CY_USING_HAL)
+	const cyhal_resource_inst_t CYBSP_CSD_CLK_DIV_obj = 
+	{
+		.type = CYHAL_RSC_CLOCK,
+		.block_num = CYBSP_CSD_CLK_DIV_HW,
+		.channel_num = CYBSP_CSD_CLK_DIV_NUM,
+	};
+#endif //defined (CY_USING_HAL)
+
 
 void init_cycfg_clocks(void)
 {
 	Cy_SysClk_PeriphDisableDivider(CY_SYSCLK_DIV_16_BIT, 0U);
 	Cy_SysClk_PeriphSetDivider(CY_SYSCLK_DIV_16_BIT, 0U, 0U);
 	Cy_SysClk_PeriphEnableDivider(CY_SYSCLK_DIV_16_BIT, 0U);
+#if defined (CY_USING_HAL)
+	cyhal_hwmgr_reserve(&CYBSP_CSD_CLK_DIV_obj);
+#endif //defined (CY_USING_HAL)
 }

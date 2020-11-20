@@ -67,7 +67,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('group__group__bsp__macros.html','');});
+$(document).ready(function(){initNavTree('md_bsp_settings.html','');});
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -87,10 +87,33 @@ $(document).ready(function(){initNavTree('group__group__bsp__macros.html','');})
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Macros</div>  </div>
+<div class="title">Peripheral Default BSP Settings </div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><h2>Peripheral Default HAL Settings</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Resource  </th><th class="markdownTableHeadCenter">Parameter  </th><th class="markdownTableHeadCenter">Value  </th><th class="markdownTableHeadLeft">Remarks   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter" rowspan="3">I2C  </td><td class="markdownTableBodyCenter">Role  </td><td class="markdownTableBodyCenter">Slave  </td><td class="markdownTableBodyLeft">Configurable to slave mode through HAL function   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Data rate  </td><td class="markdownTableBodyCenter">400 kbps  </td><td class="markdownTableBodyLeft">Configurable through HAL function   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Drive mode of SCL &amp; SDA pins  </td><td class="markdownTableBodyCenter">Open Drain (drives low)  </td><td class="markdownTableBodyLeft">External pull-up resistors are required   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter" rowspan="2">SPI  </td><td class="markdownTableBodyCenter">Data rate  </td><td class="markdownTableBodyCenter">100 kpbs  </td><td class="markdownTableBodyLeft">Configurable through HAL function   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Slave select polarity  </td><td class="markdownTableBodyCenter">Active low  </td><td class="markdownTableBodyLeft"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter" rowspan="3">UART  </td><td class="markdownTableBodyCenter">Flow control  </td><td class="markdownTableBodyCenter">No flow control  </td><td class="markdownTableBodyLeft">Configurable through HAL function   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Data format  </td><td class="markdownTableBodyCenter">8N1  </td><td class="markdownTableBodyLeft">Configurable through HAL function   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Baud rate  </td><td class="markdownTableBodyCenter">115200  </td><td class="markdownTableBodyLeft">Configurable through HAL function   </td></tr>
+</table>
+<p>NOTE: Unlike other LEDs, the LED on P3<a href="CYBSP_LED1/CYBSP_USER_LED/CYBSP_USER_LED1">4</a> is wired active high. This means that writing a 1 will turn it on and 0 will turn it off. </p><hr/>
+<p> © Cypress Semiconductor Corporation, 2019-2020. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part
 <div id="nav-path" class="navpath">

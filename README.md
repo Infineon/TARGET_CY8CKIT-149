@@ -2,8 +2,6 @@
 
 ## Overview
 
-Alpha Release Content - Support for PSoC 4 family of devices on ModusToolbox is currently in alpha. Features may change without notice. Contact [Cypress Support](https://www.cypress.com/support) for additional details.
-
 The PSoC 4100S Plus Prototyping Kit enables you to evaluate the PSoC 4100S Plus device and develop with Cypress's fourth-generation, low-power CapSense solution.
 
 ![](docs/html/board.png)
@@ -39,8 +37,8 @@ Defines:
 
 | Clock    | Source    | Output Frequency |
 |----------|-----------|------------------|
-| IMO      |           | 24.0 MHz         |
-| CLK_HF   | CLK_IMO   | 24 MHz           |
+| IMO      |           | 48.0 MHz         |
+| CLK_HF   | CLK_IMO   | 48 MHz           |
 
 ### Power Configuration
 

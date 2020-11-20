@@ -4,10 +4,10 @@
 * Description:
 * System configuration
 * This file was automatically generated and should not be modified.
-* Tools Package 2.1.0.1266
-* psoc4pdl 1.0.0.899
-* personalities_2.0 2.0.0.0
-* udd_2.0 2.0.0.299
+* Tools Package 2.2.0.2801
+* mtb-pdl-cat2 1.0.0.2377
+* personalities 3.0.0.0
+* udd 3.0.0.746
 *
 ********************************************************************************
 * Copyright 2020 Cypress Semiconductor Corporation
@@ -29,13 +29,13 @@
 #include "cycfg_system.h"
 
 #define CY_CFG_SYSCLK_HFCLK_ENABLED 1
-#define CY_CFG_SYSCLK_HFCLK_FREQ_MHZ 24UL
+#define CY_CFG_SYSCLK_HFCLK_FREQ_MHZ 48UL
 #define CY_CFG_SYSCLK_HFCLK_SOURCE CY_SYSCLK_CLKHF_IN_IMO
 #define CY_CFG_SYSCLK_HFCLK_DIVIDER CY_SYSCLK_NO_DIV
 #define CY_CFG_SYSCLK_IMO_ENABLED 1
 #define CY_CFG_SYSCLK_CLKSYS_ENABLED 1
 #define CY_CFG_SYSCLK_CLKSYS_DIVIDER CY_SYSCLK_NO_DIV
-#define CY_CFG_SYSCLK_CLKSYS_FREQ_MHZ 24UL
+#define CY_CFG_SYSCLK_CLKSYS_FREQ_MHZ 48UL
 
 __WEAK void cycfg_ClockStartupError(uint32_t error, cy_en_sysclk_status_t status)
 {
@@ -58,7 +58,7 @@ __STATIC_INLINE void Cy_SysClk_ImoInit()
 }
 __STATIC_INLINE void Cy_SysClk_ClkSysInit()
 {
-    Cy_SysClk_ClkHfSetDivider(CY_CFG_SYSCLK_CLKSYS_DIVIDER);
+    Cy_SysClk_ClkSysSetDivider(CY_CFG_SYSCLK_CLKSYS_DIVIDER);
 }
 
 
@@ -102,6 +102,10 @@ void init_cycfg_system(void)
 	Cy_SysClk_ExtClkInit();
 	#endif
 	
+	#ifdef CY_CFG_SYSCLK_EXTREF_ENABLED
+	Cy_SysClk_ExtRefInit();
+	#endif
+	
 	#ifdef CY_CFG_SYSCLK_CLKHF_ENABLED
 	#if (CY_CFG_SYSCLK_CLKHF_SOURCE == CY_SYSCLK_CLKHF_IN_ECO)
 	    /* Configure HFCLK to temporarily run from IMO to initialize other clocks */
@@ -111,15 +115,9 @@ void init_cycfg_system(void)
 	
 	/* Configure and enable PLLs */
 	#ifdef CY_CFG_SYSCLK_PLL0_ENABLED
-	#ifdef CY_CFG_SYSCLK_PLL0_SOURCE_ENABLED
-	Cy_SysClk_Pll0SourceInit();
-	#endif
 	Cy_SysClk_Pll0Init();
 	#endif
 	#ifdef CY_CFG_SYSCLK_PLL1_ENABLED
-	#ifdef CY_CFG_SYSCLK_PLL1_SOURCE_ENABLED
-	Cy_SysClk_Pll1SourceInit();
-	#endif
 	Cy_SysClk_Pll1Init();
 	#endif
 	

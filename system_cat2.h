@@ -1,6 +1,6 @@
 /***************************************************************************//**
-* \file system_psoc4.h
-* \version 1.0
+* \file system_cat2.h
+* \version 1.10
 *
 * \brief Device system header file.
 *
@@ -23,8 +23,8 @@
 *******************************************************************************/
 
 
-#ifndef _SYSTEM_PSOC4_H_
-#define _SYSTEM_PSOC4_H_
+#ifndef _SYSTEM_CAT2_H_
+#define _SYSTEM_CAT2_H_
 
 /**
 * \addtogroup group_system_config
@@ -114,22 +114,33 @@
 * dynamically to the whole available free memory up to stack memory and it
 * is set to the 0x00000080 (for ARM GCC and IAR compilers) as minimal value.
 *
-* Change the heap and stack sizes by editing the macros value in the
+* Change the stack size by editing the macro value in the
 * linker file:
 * <b>ARM GCC</b>\n
 * \code
 * __STACK_SIZE = 0x00000400;
-* __HEAP_SIZE  = 0x00000080;
 * \endcode
+*
+* \note Correct operation of malloc and related functions depends on the working
+* implementation of the 'sbrk' function. Newlib-nano (default C runtime library
+* used by the GNU Arm Embedded toolchain) provides weak 'sbrk' implementation that
+* doesn't check for heap and stack collisions during excessive memory allocations.
+* To ensure the heap always remains within the range defined by __HeapBase and
+* __HeapLimit linker symbols, provide a strong override for the 'sbrk' function:
+* \snippet startup/snippet/main.c snippet_sbrk
+* For FreeRTOS-enabled multi-threaded applications, it is sufficient to include
+* clib-support library that provides newlib-compatible implementations of
+* 'sbrk', '__malloc_lock' and '__malloc_unlock':
+* <br>
+* https://github.com/cypresssemiconductorco/clib-support.
+*
 * <b>ARM MDK</b>\n
 * \code
 * #define __STACK_SIZE       0x00000400
-* #define __HEAP_SIZE        0x00000080
 * \endcode
 * <b>IAR</b>\n
 * \code
 * define symbol __ICFEDIT_size_cstack__ = 0x0400;
-* define symbol __ICFEDIT_size_heap__ = 0x0080;
 * \endcode
 *
 * \subsection group_system_config_default_handlers Default Interrupt Handlers Definition
@@ -154,33 +165,23 @@
 * memcpy(__RAM_VECTOR_TABLE, __VECTOR_TABLE, CY_VECTOR_TABLE_SIZE_BYTES);
 * \endcode
 *
-* \section group_system_config_MISRA MISRA-C Compliance
-*
-* The startup driver has the following specific deviations:
-*
-* <table class="doxtable">
-*   <tr>
-*     <th>MISRA Rule</th>
-*     <th>Rule Class (Required/Advisory)</th>
-*     <th>Rule Description</th>
-*     <th>Description of Deviation(s)</th>
-*   </tr>
-*   <tr>
-*     <td>20.1</td>
-*     <td>A</td>
-*     <td>\#include directives should only be preceded by preprocessor directives
-*         or comments.</td>
-*     <td>The include directives are in generated files. These files should not
-*         be changed manually.</td>
-*   </tr>
-* </table>
-*
 * \section group_system_config_changelog Changelog
 *   <table class="doxtable">
 *   <tr>
 *       <th>Version</th>
 *       <th>Changes</th>
 *       <th>Reason for Change</th>
+*   </tr>
+*   <tr>
+*       <td>1.10</td>
+*       <td>
+*           - Updated Reset_Handler() for Cortex-M0 devices.
+*           - Updated Reset_Handler() with IAR compiler support.
+*           - Added low-level initialization routine for the RTOS-enabled applications.
+*           - Updated system header with the vector table allocation.
+*           - Set default system core clock frequency to 24 MHz.
+*       </td>
+*       <td>Implementation and documentation enhancements.</td>
 *   </tr>
 *   <tr>
 *       <td>1.0</td>
@@ -253,6 +254,14 @@ extern uint32_t cy_delayFreqHz;
 extern uint32_t cy_delayFreqKhz;
 extern uint8_t  cy_delayFreqMhz;
 extern uint32_t cy_delay32kMs;
+
+/* Defined in in the startup_<device>.c file */
+typedef void (* cy_israddress)(void);   /**< Type of ISR callbacks */
+#define CY_VECTOR_TABLE_SIZE (48U)
+#define CY_VECTOR_TABLE_SIZE_BYTES (CY_VECTOR_TABLE_SIZE * 4U)
+extern cy_israddress __RAM_VECTOR_TABLE[CY_VECTOR_TABLE_SIZE];
+extern const cy_israddress __VECTOR_TABLE[CY_VECTOR_TABLE_SIZE];
+
 /** \endcond */
 
 /**
@@ -269,7 +278,7 @@ extern uint32_t SystemCoreClock;
 }
 #endif
 
-#endif /* _SYSTEM_PSOC4_H_ */
+#endif /* _SYSTEM_CAT2_H_ */
 
 
 /* [] END OF FILE */

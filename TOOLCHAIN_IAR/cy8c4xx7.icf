@@ -118,6 +118,6 @@ keep {  section .cy_app_header,
 /* Flash */
 define exported symbol __cy_memory_0_start    = 0x00000000;
 define exported symbol __cy_memory_0_length   = 0x00020000;
-define exported symbol __cy_memory_0_row_size = 0x200;
+define exported symbol __cy_memory_0_row_size = 0x100;
 
 /* EOF */

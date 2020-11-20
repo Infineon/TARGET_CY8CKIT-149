@@ -1,12 +1,12 @@
 /***************************************************************************//**
-* \file system_psoc4.c
-* \version 1.0
+* \file system_cat2.c
+* \version 1.10
 *
 * The device system-source file.
 *
 ********************************************************************************
 * \copyright
-* Copyright 2016-2019 Cypress Semiconductor Corporation
+* Copyright 2016-2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@
 *******************************************************************************/
 
 #include <stdbool.h>
-#include "system_psoc4.h"
+#include "system_cat2.h"
 #include "cy_device.h"
 #include "cy_device_headers.h"
 #include "cy_syslib.h"
@@ -36,7 +36,7 @@
 *******************************************************************************/
 
 /** Default ClkSys system core frequency in Hz */
-#define CY_CLK_SYSTEM_FREQ_HZ_DEFAULT       (12000000UL)
+#define CY_CLK_SYSTEM_FREQ_HZ_DEFAULT       (24000000UL)
 
 
 /**
@@ -77,26 +77,19 @@ uint32_t cy_delay32kMs    = CY_DELAY_MS_OVERFLOW_THRESHOLD *
 * Function Name: SystemInit
 ****************************************************************************//**
 *
-* Initializes the system:
-* - Unlocks and disables WDT.
-* - Disables interrupts.
-* - Calls the Cy_SystemInit() function.
+* Initializes the system: disables the WDT, disables the interrupts and calls
+* the \ref Cy_SystemInit() function.
 *
 * \note
 * This function does not initialize clocks.
-* To set up clocks in pre-main, define strong function \ref Cy_SystemInit with 
+* To set up clocks in pre-main, define strong function \ref Cy_SystemInit with
 * your custom clock initialization.
 *
 *******************************************************************************/
 void SystemInit(void)
 {
-    /* Disable WDT */
     Cy_WDT_Disable();
-
-    /* Disable interrupts */
     __disable_irq();
-
-    /* Call Cy_SystemInit */
     Cy_SystemInit();
 }
 
@@ -105,8 +98,11 @@ void SystemInit(void)
 * Function Name: Cy_SystemInit
 ****************************************************************************//**
 *
-* Empty weak function. The application code provides a strong function 
+* Empty weak function. The application code provides a strong function
 * for the actual implementation.
+*
+* \note Call \ref SystemCoreClockUpdate() in this function if this function
+* affects the CLK_HF0 frequency.
 *
 *******************************************************************************/
 __WEAK void Cy_SystemInit(void)
@@ -119,10 +115,12 @@ __WEAK void Cy_SystemInit(void)
 * Function Name: SystemCoreClockUpdate
 ****************************************************************************//**
 *
-* Gets core clock frequency and updates \ref SystemCoreClock.
+* Gets core clock frequency, updates \ref SystemCoreClock, and global variables
+* used by the \ref Cy_SysLib_Delay(), \ref Cy_SysLib_DelayUs(), and
+* \ref Cy_SysLib_DelayCycles().
 *
-* Updates global variables used by the \ref Cy_SysLib_Delay(), \ref
-* Cy_SysLib_DelayUs(), and \ref Cy_SysLib_DelayCycles().
+* \attention The function must be called whenever the core clock is changed
+* during program execution.
 *
 *******************************************************************************/
 void SystemCoreClockUpdate (void)

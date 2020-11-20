@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['button_20pins',['Button Pins',['../group__group__bsp__pins__btn.html',1,'']]],
-  ['bsp_20settings',['BSP Settings',['../group__group__bsp__settings.html',1,'']]]
+  ['cy8ckit_2d149_20bsp',['CY8CKIT-149 BSP',['../index.html',1,'']]]
 ];
