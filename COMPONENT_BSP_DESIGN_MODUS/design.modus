@@ -343,6 +343,14 @@
                         <Param id="divider" value="1"/>
                     </Personality>
                 </Block>
+                <Block location="srss[0].power[0]">
+                    <Personality template="m0s8power" version="1.0">
+                        <Param id="idlePwrMode" value="CY_CFG_PWR_MODE_DEEPSLEEP"/>
+                        <Param id="deepsleepLatency" value="0"/>
+                        <Param id="vddaMv" value="3300"/>
+                        <Param id="vdddMv" value="3300"/>
+                    </Personality>
+                </Block>
             </BlockConfig>
             <Netlist>
                 <Net>

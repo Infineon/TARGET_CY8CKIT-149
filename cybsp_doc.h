@@ -1,6 +1,6 @@
 /***********************************************************************************************//**
  * \copyright
- * Copyright 2018-2020 Cypress Semiconductor Corporation
+ * Copyright 2018-2021 Cypress Semiconductor Corporation
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,11 +32,14 @@ extern "C" {
 /**
  * \addtogroup group_bsp_pins Pin Mappings
  * \{
+ * Macro definitions for common peripheral pins on the board.
  */
 
+#if defined(CYBSP_USER_LED)
 /**
  * \addtogroup group_bsp_pins_led LED Pins
  * \{
+ * Pins connected to user LEDs on the board.
  */
 
 #ifdef CYBSP_LED_RGB_RED
@@ -197,10 +200,13 @@ extern "C" {
 #endif
 
 /** \} group_bsp_pins_led */
+#endif // defined(CYBSP_USER_LED)
 
+#if defined(CYBSP_USER_BTN)
 /**
  * \addtogroup group_bsp_pins_btn Button Pins
  * \{
+ * Pins connected to user buttons on the board.
  */
 
 #ifdef CYBSP_SW1
@@ -237,10 +243,13 @@ extern "C" {
 #endif
 
 /** \} group_bsp_pins_btn */
+#endif // defined(CYBSP_USER_BTN)
 
+#if defined(CYBSP_DEBUG_UART_RX) || defined(CYBSP_SWDIO)
 /**
  * \addtogroup group_bsp_pins_comm Communication Pins
  * \{
+ * Pins associated with connections on the board for communication interfaces (UART/I2C/SPI/...)
  */
 
 #ifdef CYBSP_DEBUG_UART_RX
@@ -450,11 +459,13 @@ extern "C" {
 #endif
 
 /** \} group_bsp_pins_comm */
+#endif // defined(CYBSP_DEBUG_UART_RX) || defined(CYBSP_SWDIO)
 
-
+#if defined(CYBSP_A0)
 /**
  * \addtogroup group_bsp_pins_arduino Arduino Header Pins
  * \{
+ * Pins mapped to the Arduino header on the board.
  */
 
 #ifdef CYBSP_A0
@@ -547,10 +558,13 @@ extern "C" {
 #endif
 
 /** \} group_bsp_pins_arduino */
+#endif // defined(CYBSP_A0)
 
+#if defined(CYBSP_J2_1)
 /**
  * \addtogroup group_bsp_pins_j2 J2 Header Pins
  * \{
+ * Pins mapped to the J2 header on the board.
  */
 
 #ifdef CYBSP_J2_1
@@ -639,10 +653,13 @@ extern "C" {
 #endif
 
 /** \} group_bsp_pins_j2 */
+#endif // defined(CYBSP_J2_1)
 
+#if defined(CYBSP_J6_1)
 /**
  * \addtogroup group_bsp_pins_j6 J6 Header Pins
  * \{
+ * Pins mapped to the J6 header on the board.
  */
 
 #ifdef CYBSP_J6_1
@@ -711,10 +728,13 @@ extern "C" {
 #endif
 
 /** \} group_bsp_pins_j6 */
+#endif // defined(CYBSP_J6_1)
 
+#if defined(CYBSP_CMOD) || defined(CYBSP_CINA) || defined(CYBSP_CINTA)
 /**
  * \addtogroup group_bsp_pins_capsense Capsense
  * \{
+ * Pins connected to CapSense sensors on the board.
  */
 
 #ifdef CYBSP_CSD_TX
@@ -791,10 +811,13 @@ extern "C" {
 #endif
 
 /** \} group_bsp_pins_capsense */
+#endif // defined(CYBSP_CMOD) || defined(CYBSP_CINA) || defined(CYBSP_CINTA)
 
+#if defined(CYBSP_WCO_IN)
 /**
  * \addtogroup group_bsp_pins_wco WCO
  * \{
+ * Pins connected to the WCO on the board.
  */
 #ifdef CYBSP_WCO_IN
 /** Pin: WCO input \def CYBSP_WCO_IN
@@ -806,7 +829,7 @@ extern "C" {
 #endif
 
 /** \} group_bsp_pins_wco */
-
+#endif // defined(CYBSP_WCO_IN)
 
 /** \} group_bsp_pins */
 

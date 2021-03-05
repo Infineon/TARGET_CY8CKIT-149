@@ -5,12 +5,12 @@
 * Clock configuration
 * This file was automatically generated and should not be modified.
 * Tools Package 2.2.0.2801
-* mtb-pdl-cat2 1.0.0.2377
+* mtb-pdl-cat2 1.1.0.2839
 * personalities 3.0.0.0
-* udd 3.0.0.746
+* udd 3.0.0.912
 *
 ********************************************************************************
-* Copyright 2020 Cypress Semiconductor Corporation
+* Copyright 2021 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");

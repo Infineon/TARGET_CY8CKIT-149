@@ -5,12 +5,12 @@
 * Pin configuration
 * This file was automatically generated and should not be modified.
 * Tools Package 2.2.0.2801
-* mtb-pdl-cat2 1.0.0.2377
+* mtb-pdl-cat2 1.1.0.2839
 * personalities 3.0.0.0
-* udd 3.0.0.746
+* udd 3.0.0.912
 *
 ********************************************************************************
-* Copyright 2020 Cypress Semiconductor Corporation
+* Copyright 2021 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -219,6 +219,7 @@ extern "C" {
 	#define ioss_0_port_4_pin_1_HSIOM HSIOM_SEL_GPIO
 #endif
 #define CYBSP_CMOD_HSIOM ioss_0_port_4_pin_1_HSIOM
+#define CYBSP_CMOD_IRQ ioss_interrupt_gpio_IRQn
 #if defined (CY_USING_HAL)
 	#define CYBSP_CMOD_HAL_PORT_PIN P4_1
 #endif //defined (CY_USING_HAL)
@@ -245,6 +246,7 @@ extern "C" {
 	#define ioss_0_port_4_pin_2_HSIOM HSIOM_SEL_GPIO
 #endif
 #define CYBSP_CINTA_HSIOM ioss_0_port_4_pin_2_HSIOM
+#define CYBSP_CINTA_IRQ ioss_interrupt_gpio_IRQn
 #if defined (CY_USING_HAL)
 	#define CYBSP_CINTA_HAL_PORT_PIN P4_2
 #endif //defined (CY_USING_HAL)
@@ -271,6 +273,7 @@ extern "C" {
 	#define ioss_0_port_4_pin_3_HSIOM HSIOM_SEL_GPIO
 #endif
 #define CYBSP_CINTB_HSIOM ioss_0_port_4_pin_3_HSIOM
+#define CYBSP_CINTB_IRQ ioss_interrupt_gpio_IRQn
 #if defined (CY_USING_HAL)
 	#define CYBSP_CINTB_HAL_PORT_PIN P4_3
 #endif //defined (CY_USING_HAL)
@@ -297,6 +300,7 @@ extern "C" {
 	#define ioss_0_port_4_pin_4_HSIOM HSIOM_SEL_GPIO
 #endif
 #define CYBSP_CSX_BTN2_HSIOM ioss_0_port_4_pin_4_HSIOM
+#define CYBSP_CSX_BTN2_IRQ ioss_interrupt_gpio_IRQn
 #if defined (CY_USING_HAL)
 	#define CYBSP_CSX_BTN2_HAL_PORT_PIN P4_4
 #endif //defined (CY_USING_HAL)
@@ -323,6 +327,7 @@ extern "C" {
 	#define ioss_0_port_4_pin_5_HSIOM HSIOM_SEL_GPIO
 #endif
 #define CYBSP_CSX_BTN1_HSIOM ioss_0_port_4_pin_5_HSIOM
+#define CYBSP_CSX_BTN1_IRQ ioss_interrupt_gpio_IRQn
 #if defined (CY_USING_HAL)
 	#define CYBSP_CSX_BTN1_HAL_PORT_PIN P4_5
 #endif //defined (CY_USING_HAL)
@@ -349,6 +354,7 @@ extern "C" {
 	#define ioss_0_port_4_pin_6_HSIOM HSIOM_SEL_GPIO
 #endif
 #define CYBSP_CSX_BTN0_HSIOM ioss_0_port_4_pin_6_HSIOM
+#define CYBSP_CSX_BTN0_IRQ ioss_interrupt_gpio_IRQn
 #if defined (CY_USING_HAL)
 	#define CYBSP_CSX_BTN0_HAL_PORT_PIN P4_6
 #endif //defined (CY_USING_HAL)
@@ -408,6 +414,8 @@ extern "C" {
 #endif
 #define CYBSP_CSD_SLD1_HSIOM ioss_0_port_6_pin_0_HSIOM
 #define CYBSP_CS_SLD1_HSIOM CYBSP_CSD_SLD1_HSIOM
+#define CYBSP_CSD_SLD1_IRQ ioss_interrupt_gpio_IRQn
+#define CYBSP_CS_SLD1_IRQ CYBSP_CSD_SLD1_IRQ
 #if defined (CY_USING_HAL)
 	#define CYBSP_CSD_SLD1_HAL_PORT_PIN P6_0
 	#define CYBSP_CS_SLD1_HAL_PORT_PIN CYBSP_CSD_SLD1_HAL_PORT_PIN
@@ -447,6 +455,8 @@ extern "C" {
 #endif
 #define CYBSP_CSD_SLD2_HSIOM ioss_0_port_6_pin_1_HSIOM
 #define CYBSP_CS_SLD2_HSIOM CYBSP_CSD_SLD2_HSIOM
+#define CYBSP_CSD_SLD2_IRQ ioss_interrupt_gpio_IRQn
+#define CYBSP_CS_SLD2_IRQ CYBSP_CSD_SLD2_IRQ
 #if defined (CY_USING_HAL)
 	#define CYBSP_CSD_SLD2_HAL_PORT_PIN P6_1
 	#define CYBSP_CS_SLD2_HAL_PORT_PIN CYBSP_CSD_SLD2_HAL_PORT_PIN
@@ -486,6 +496,8 @@ extern "C" {
 #endif
 #define CYBSP_CSD_SLD3_HSIOM ioss_0_port_6_pin_2_HSIOM
 #define CYBSP_CS_SLD3_HSIOM CYBSP_CSD_SLD3_HSIOM
+#define CYBSP_CSD_SLD3_IRQ ioss_interrupt_gpio_IRQn
+#define CYBSP_CS_SLD3_IRQ CYBSP_CSD_SLD3_IRQ
 #if defined (CY_USING_HAL)
 	#define CYBSP_CSD_SLD3_HAL_PORT_PIN P6_2
 	#define CYBSP_CS_SLD3_HAL_PORT_PIN CYBSP_CSD_SLD3_HAL_PORT_PIN
@@ -525,6 +537,8 @@ extern "C" {
 #endif
 #define CYBSP_CSD_SLD4_HSIOM ioss_0_port_6_pin_4_HSIOM
 #define CYBSP_CS_SLD4_HSIOM CYBSP_CSD_SLD4_HSIOM
+#define CYBSP_CSD_SLD4_IRQ ioss_interrupt_gpio_IRQn
+#define CYBSP_CS_SLD4_IRQ CYBSP_CSD_SLD4_IRQ
 #if defined (CY_USING_HAL)
 	#define CYBSP_CSD_SLD4_HAL_PORT_PIN P6_4
 	#define CYBSP_CS_SLD4_HAL_PORT_PIN CYBSP_CSD_SLD4_HAL_PORT_PIN
@@ -564,6 +578,8 @@ extern "C" {
 #endif
 #define CYBSP_CSD_SLD5_HSIOM ioss_0_port_6_pin_5_HSIOM
 #define CYBSP_CS_SLD5_HSIOM CYBSP_CSD_SLD5_HSIOM
+#define CYBSP_CSD_SLD5_IRQ ioss_interrupt_gpio_IRQn
+#define CYBSP_CS_SLD5_IRQ CYBSP_CSD_SLD5_IRQ
 #if defined (CY_USING_HAL)
 	#define CYBSP_CSD_SLD5_HAL_PORT_PIN P6_5
 	#define CYBSP_CS_SLD5_HAL_PORT_PIN CYBSP_CSD_SLD5_HAL_PORT_PIN

@@ -6,6 +6,7 @@
  ******************************************************************************/
 /*
  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
+ * Copyright 2019-2021 Cypress Semiconductor Corporation
  *
  * SPDX-License-Identifier: Apache-2.0
  *

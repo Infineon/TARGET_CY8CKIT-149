@@ -8,12 +8,15 @@ The CY8CKIT-149 library includes the following:
 * BSP specific makefile to configure the build process for the board
 * cybsp.c/h files to initialize the board and any system peripherals
 * cybsp_types.h file describing basic board setup
-* Linker script & startup code for GCC, IAR, ARM toolchains
+* Linker script & startup code for GCC, IAR, and ARM toolchains
 * Configurator design files (and generated code) to setup board specific peripherals
 * .lib file references for all dependent libraries
 * API documentation
 
 ### What Changed?
+#### v1.1.0
+* Updated configuration to include power settings
+* Minor documentation updates
 #### v1.0.0
 * Initial production release
 #### v0.5.0
@@ -25,7 +28,7 @@ This version of the CY8CKIT-149 BSP was validated for compatibility with the fol
 | Software and Tools                        | Version |
 | :---                                      | :----:  |
 | ModusToolbox Software Environment         | 2.2     |
-| GCC Compiler                              | 9.2     |
+| GCC Compiler                              | 9.3     |
 | IAR Compiler                              | 8.4     |
 | ARM Compiler                              | 6.11    |
 
@@ -41,4 +44,4 @@ Minimum required ModusToolbox Software Environment: v2.2
 [api]: modules.html
 
 ---
-© Cypress Semiconductor Corporation, 2019-2020.
+© Cypress Semiconductor Corporation, 2019-2021.
