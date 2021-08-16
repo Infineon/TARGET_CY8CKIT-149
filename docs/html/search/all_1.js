@@ -41,6 +41,7 @@ var searchData=
   ['cybsp_5fled_5fsld5',['CYBSP_LED_SLD5',['../group__group__bsp__pins__led.html#ga89657c9aa364accb5dbf0a6583f725d2',1,'cycfg_pins.h']]],
   ['cybsp_5fled_5fstate_5foff',['CYBSP_LED_STATE_OFF',['../group__group__bsp__pin__state.html#ga31577fad7e20fcb174e2ecbea2dd063e',1,'cybsp_types.h']]],
   ['cybsp_5fled_5fstate_5fon',['CYBSP_LED_STATE_ON',['../group__group__bsp__pin__state.html#gaedfd071923034a335d143b7b64579169',1,'cybsp_types.h']]],
+  ['cybsp_5frslt_5ferr_5fsysclk_5fpm_5fcallback',['CYBSP_RSLT_ERR_SYSCLK_PM_CALLBACK',['../group__group__bsp__errors.html#gaee745bd3fccec6eb2df1e83fc4c9f775',1,'cybsp.h']]],
   ['cybsp_5fspi_5fclk',['CYBSP_SPI_CLK',['../group__group__bsp__pins__comm.html#gabeb93b3f9b953934666f83a1a97c4367',1,'cycfg_pins.h']]],
   ['cybsp_5fspi_5fcs',['CYBSP_SPI_CS',['../group__group__bsp__pins__comm.html#gad8d3655d655bb752363587ea521c8856',1,'cycfg_pins.h']]],
   ['cybsp_5fspi_5fmiso',['CYBSP_SPI_MISO',['../group__group__bsp__pins__comm.html#gaf6282da9ac2be0fe7a4ac84735a24bb0',1,'cycfg_pins.h']]],

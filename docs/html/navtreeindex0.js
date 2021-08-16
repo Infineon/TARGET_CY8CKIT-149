@@ -1,7 +1,9 @@
 var NAVTREEINDEX0 =
 {
-"group__group__bsp__functions.html":[2,2],
-"group__group__bsp__functions.html#gab989986b285e127f78f61c29f6ccbbfa":[2,2,0],
+"group__group__bsp__errors.html":[2,2],
+"group__group__bsp__errors.html#gaee745bd3fccec6eb2df1e83fc4c9f775":[2,2,0],
+"group__group__bsp__functions.html":[2,3],
+"group__group__bsp__functions.html#gab989986b285e127f78f61c29f6ccbbfa":[2,3,0],
 "group__group__bsp__pin__state.html":[2,1],
 "group__group__bsp__pin__state.html#ga31577fad7e20fcb174e2ecbea2dd063e":[2,1,1],
 "group__group__bsp__pin__state.html#ga7778aac7809929e1032f406b59cbad90":[2,1,2],

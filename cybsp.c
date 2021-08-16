@@ -7,7 +7,9 @@
  *
  ***************************************************************************************************
  * \copyright
- * Copyright 2018-2021 Cypress Semiconductor Corporation
+ * Copyright 2018-2021 Cypress Semiconductor Corporation (an Infineon company) or
+ * an affiliate of Cypress Semiconductor Corporation
+ *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,6 +36,40 @@
 extern "C" {
 #endif
 
+// The sysclk deep sleep callback is recommended to be the last callback that is executed before
+// entry into deep sleep mode and the first one upon exit the deep sleep mode.
+// Doing so minimizes the time spent on low power mode entry and exit.
+#ifndef CYBSP_SYSCLK_PM_CALLBACK_ORDER
+    #define CYBSP_SYSCLK_PM_CALLBACK_ORDER  (255u)
+#endif
+
+//--------------------------------------------------------------------------------------------------
+// cybsp_register_sysclk_pm_callback
+//
+// Registers a power management callback that prepares the clock system for entering deep sleep mode
+// and restore the clocks upon wakeup from deep sleep.
+// NOTE: This is called automatically as part of \ref cybsp_init
+//--------------------------------------------------------------------------------------------------
+static cy_rslt_t cybsp_register_sysclk_pm_callback(void)
+{
+    cy_rslt_t                             result                         = CY_RSLT_SUCCESS;
+    static cy_stc_syspm_callback_params_t cybsp_sysclk_pm_callback_param = { NULL, NULL };
+    static cy_stc_syspm_callback_t        cybsp_sysclk_pm_callback       =
+    {
+        .callback       = &Cy_SysClk_DeepSleepCallback,
+        .type           = CY_SYSPM_DEEPSLEEP,
+        .callbackParams = &cybsp_sysclk_pm_callback_param,
+        .order          = CYBSP_SYSCLK_PM_CALLBACK_ORDER
+    };
+
+    if (!Cy_SysPm_RegisterCallback(&cybsp_sysclk_pm_callback))
+    {
+        result = CYBSP_RSLT_ERR_SYSCLK_PM_CALLBACK;
+    }
+    return result;
+}
+
+
 //--------------------------------------------------------------------------------------------------
 // cybsp_init
 //--------------------------------------------------------------------------------------------------
@@ -59,6 +95,11 @@ cy_rslt_t cybsp_init(void)
     #if defined(COMPONENT_BSP_DESIGN_MODUS) || defined(COMPONENT_CUSTOM_DESIGN_MODUS)
     init_cycfg_all();
     #endif
+
+    if (CY_RSLT_SUCCESS == result)
+    {
+        result = cybsp_register_sysclk_pm_callback();
+    }
 
     return result;
 }

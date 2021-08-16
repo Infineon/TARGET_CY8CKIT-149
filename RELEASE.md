@@ -14,6 +14,9 @@ The CY8CKIT-149 library includes the following:
 * API documentation
 
 ### What Changed?
+#### v1.2.0
+* Added SysClk power management callback
+* Minor branding updates
 #### v1.1.0
 * Updated configuration to include power settings
 * Minor documentation updates
@@ -27,8 +30,8 @@ This version of the CY8CKIT-149 BSP was validated for compatibility with the fol
 
 | Software and Tools                        | Version |
 | :---                                      | :----:  |
-| ModusToolbox Software Environment         | 2.2     |
-| GCC Compiler                              | 9.3     |
+| ModusToolbox Software Environment         | 2.2.1   |
+| GCC Compiler                              | 9.3.1   |
 | IAR Compiler                              | 8.4     |
 | ARM Compiler                              | 6.11    |
 
@@ -38,10 +41,10 @@ Minimum required ModusToolbox Software Environment: v2.2
 * [CY8CKIT-149 BSP API Reference Manual][api]
 * [CY8CKIT-149 Documentation](https://www.cypress.com/documentation/development-kitsboards/cy8ckit-149-psoc-4100s-plus-prototyping-kit)
 * [Cypress Semiconductor, an Infineon Technologies Company](http://www.cypress.com)
-* [Cypress Semiconductor GitHub](https://github.com/cypresssemiconductorco)
+* [Infineon GitHub](https://github.com/infineon)
 * [ModusToolbox](https://www.cypress.com/products/modustoolbox-software-environment)
 
 [api]: modules.html
 
 ---
-© Cypress Semiconductor Corporation, 2019-2021.
+© Cypress Semiconductor Corporation (an Infineon company) or an affiliate of Cypress Semiconductor Corporation, 2019-2021.
