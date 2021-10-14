@@ -4,13 +4,14 @@
 * Description:
 * System configuration
 * This file was automatically generated and should not be modified.
-* Tools Package 2.2.0.2801
-* mtb-pdl-cat2 1.1.0.2839
-* personalities 3.0.0.0
-* udd 3.0.0.912
+* Tools Package 2.4.0.5721
+* mtb-pdl-cat2 1.4.0.5338
+* personalities 5.0.0.0
+* udd 3.0.0.1428
 *
 ********************************************************************************
-* Copyright 2021 Cypress Semiconductor Corporation
+* Copyright 2021 Cypress Semiconductor Corporation (an Infineon company) or
+* an affiliate of Cypress Semiconductor Corporation.
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,6 +51,7 @@ extern "C" {
 #define CY_CFG_SYSCLK_IMO_FREQ_HZ 48000000UL
 #define CY_CFG_SYSCLK_IMO_FREQ_MHZ 48UL
 #define CY_CFG_SYSCLK_IMO_FREQ CY_SYSCLK_IMO_48MHZ
+#define CY_CFG_SYSCLK_IMO_LOCK CY_SYSCLK_IMO_LOCK_NONE
 #define srss_0_clock_0_sysclk_0_ENABLED 1U
 #define srss_0_power_0_ENABLED 1U
 #define CY_CFG_PWR_MODE_ACTIVE 0x04UL
