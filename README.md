@@ -2,7 +2,7 @@
 
 ## Overview
 
-The PSoC™ 4100S Plus Prototyping Kit enables you to evaluate the PSoC™ 4100S Plus device and develop with Cypress's fourth-generation, low-power CAPSENSE™ solution.
+The PSOC™ 4100S Plus Prototyping Kit enables you to evaluate the PSOC™ 4100S Plus device and develop with Cypress's fourth-generation, low-power CAPSENSE™ solution.
 
 ![](docs/html/board.png)
 
@@ -17,12 +17,12 @@ To use code from the BSP, simply include a reference to `cybsp.h`.
 
 ### Kit Contents:
 
-* CY8CKIT-149 PSoC™ 4100S Plus Prototyping board
+* CY8CKIT-149 PSOC™ 4100S Plus Prototyping board
 * Quick Start Guide
 
 ## BSP Configuration
 
-The BSP has a few hooks that allow its behavior to be configured. Some of these items are enabled by default while others must be explicitly enabled. Items enabled by default are specified in the CY8CKIT-149.mk file. The items that are enabled can be changed by creating a custom BSP or by editing the application makefile.
+The BSP has a few hooks that allow its behavior to be configured. Some of these items are enabled by default while others must be explicitly enabled. Items enabled by default are specified in the bsp.mk file. The items that are enabled can be changed by creating a custom BSP or by editing the application makefile.
 
 Components:
 * Device specific category reference (e.g.: CAT1) - This component, enabled by default, pulls in any device specific code for this board.
@@ -63,4 +63,4 @@ See the [BSP API Reference Manual][api] for the complete list of the provided in
 [settings]: https://infineon.github.io/TARGET_CY8CKIT-149/html/md_bsp_settings.html
 
 ---
-© Cypress Semiconductor Corporation (an Infineon company) or an affiliate of Cypress Semiconductor Corporation, 2019-2022.
+© Cypress Semiconductor Corporation (an Infineon company) or an affiliate of Cypress Semiconductor Corporation, 2019-2025.

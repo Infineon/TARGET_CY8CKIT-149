@@ -1,12 +1,12 @@
 /***************************************************************************//**
 * \file system_cat2.c
-* \version 2.0
+* \version 2.1
 *
 * The device system-source file.
 *
 ********************************************************************************
 * \copyright
-* (c) (2016-2022), Cypress Semiconductor Corporation (an Infineon company) or
+* (c) (2016-2024), Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.
 *
 * SPDX-License-Identifier: Apache-2.0
@@ -79,18 +79,28 @@ uint32_t cy_delay32kMs    = CY_DELAY_MS_OVERFLOW_THRESHOLD *
 * Function Name: SystemInit
 ****************************************************************************//**
 *
-* Initializes the system: disables the WDT, disables the interrupts and calls
-* the \ref Cy_SystemInit() function.
+* Initializes the system: unlocks and disables the WDT, disables the interrupts
+* and calls the \ref Cy_SystemInit() function.
 *
 * \note
 * This function does not initialize clocks.
 * To set up clocks in pre-main, define strong function \ref Cy_SystemInit with
 * your custom clock initialization.
 *
+* \warning For PSoC4 HVMS/PA the Watchdog timer should be unlocked before
+* being disabled.
+*
 *******************************************************************************/
 void SystemInit(void)
 {
+#if defined(CY_IP_M0S8SRSSHV)
+    /* The Watchdog timer should be unlocked before being disabled */
+    Cy_WDT_Unlock();
+#endif /* CY_IP_M0S8SRSSHV */
     Cy_WDT_Disable();
+#if defined(CY_IP_M0S8SRSSHV)
+    Cy_WDT_Lock();
+#endif /* CY_IP_M0S8SRSSHV */
     __disable_irq();
     Cy_SystemInit();
 }

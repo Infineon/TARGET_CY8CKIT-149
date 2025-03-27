@@ -1,13 +1,13 @@
 /******************************************************************************
  * @file     startup_psoc4100sp.c
  * @brief    CMSIS-Core(M) Device Startup File for Category 2 device
- * @version  V2.0.0
- * @date     20. May 2019
+ * @version  V2.1.0
+ * @date     10. June 2024
  ******************************************************************************/
 /*
- * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
+ * Copyright (c) 2009-2024 Arm Limited. All rights reserved.
  *
- * (c) (2019-2021), Cypress Semiconductor Corporation (an Infineon company) or
+ * (c) (2019-2024), Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.
  *
  * SPDX-License-Identifier: Apache-2.0
@@ -206,12 +206,15 @@ int __low_level_init(void)
  *----------------------------------------------------------------------------*/
 void Reset_Handler(void)
 {
+#if defined(SFLASH_AUTO_SFLASH)
+    Cy_BootStatus();
+#endif /* SFLASH_AUTO_SFLASH */
     Cy_OnResetUser();
 
     /* CMSIS System Initialization */
     SystemInit();
 
-    /* Copy vector table from ROM to RAM*/
+    /* Copy vector table from ROM to RAM */
     memcpy(__RAM_VECTOR_TABLE, __VECTOR_TABLE, CY_VECTOR_TABLE_SIZE_BYTES);
 
     /* Set vector table offset */
@@ -263,5 +266,27 @@ __WEAK void Cy_OnResetUser(void)
     * global variables with CPU frequency are initialized properly.
     */
 }
+
+#if defined(SFLASH_AUTO_SFLASH)
+/*----------------------------------------------------------------------------
+  Default Handler for Boot-Up Status
+
+ \note Applicable to PSoC4 HVMS/PA only.
+ *----------------------------------------------------------------------------*/
+__WEAK void Cy_BootStatus(void)
+{
+    /* This function has the WEAK option, so the user can redefine the function
+    * behavior for a custom processing.
+    * For example, the function redefinition could be constructed from Boot
+    * Result processing and NVIC_SystemReset() function call. */
+    if (0UL != Cy_SysLib_GetBootStatus())
+    {
+        /* To get additional information from BOOT_RESULT registers call \ref Cy_SysLib_GetBootResult() */
+
+        /* Complete an operation here when a boot error */
+        while(true) {}
+    }
+}
+#endif /* SFLASH_AUTO_SFLASH */
 
 /* [] END OF FILE */

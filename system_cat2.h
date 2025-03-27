@@ -1,12 +1,12 @@
 /***************************************************************************//**
 * \file system_cat2.h
-* \version 2.0
+* \version 2.1
 *
 * \brief Device system header file.
 *
 ********************************************************************************
 * \copyright
-* (c) (2016-2022), Cypress Semiconductor Corporation (an Infineon company) or
+* (c) (2016-2024), Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.
 *
 * SPDX-License-Identifier: Apache-2.0
@@ -171,6 +171,16 @@
 * <table class="doxtable">
 *   <tr><th>Version</th><th>Changes</th><th>Reason for Change</th></tr>
 *   <tr>
+*     <td rowspan="2">2.1</td>
+*     <td>Added Cy_BootStatus() for PSoC4 HVMS/PA platform.
+*     Updated Reset_Handler() to support Default Handler for Boot-Up Status.</td>
+*     <td rowspan="2">Major: Support for new devices.</td>
+*   </tr>
+*   <tr>
+*     <td>Updated \ref SystemInit() function for PSoC4 HVMS/PA devices.
+*     Minor documentation updates.</td>
+*   </tr>
+*   <tr>
 *     <td>2.0</td>
 *     <td>Removed unused extern cy_delayFreqHz.</td>
 *     <td>PDL major revision.</td>
@@ -272,6 +282,7 @@ extern void SystemCoreClockUpdate(void);
 extern void     Default_Handler (void);
 
 extern void     Cy_OnResetUser(void);
+extern void     Cy_BootStatus(void);
 
 extern uint32_t cy_delayFreqKhz;
 extern uint8_t  cy_delayFreqMhz;
